@@ -1,0 +1,58 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-07 00:23:06
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-08 00:55:06
+---
+# file: roles/common/tasks/main.yml
+
+- name: copy /etc/hosts
+  copy: backup=yes mode=0644 owner=root group=root src=hosts dest=/etc/hosts
+  sudo: yes
+
+- name: set TIMEZONE
+  command: /bin/timedatectl set-timezone Asia/Tokyo
+  sudo: yes
+
+- name: install individual packages
+  yum: pkg="{{ item }}" state=installed
+  with_items: "{{ packages }}"
+  sudo: yes
+
+- name: stop and disable services
+  service: state=stopped enabled=no name="{{ item }}"
+  with_items:
+  - NetworkManager
+  - firewalld
+  sudo: yes
+
+- name: enable and start services
+  service: state=started enabled=yes name="{{ item }}"
+  with_items:
+  - network
+  - iptables
+  sudo: yes
+
+- name: be sure ntp is configured
+  template: src=ntp.conf.j2 dest=/etc/ntp.conf
+  notify:
+  - restart ntpd
+  tags: ntp
+  sudo: yes
+
+- name: be sure ntpd is running and enabled
+  service: name=ntpd state=running enabled=yes
+  tags: ntp
+  sudo: yes
+
+- name: clear iptables
+  command: iptables -F
+  sudo: yes
+
+- name: save iptables
+  command: service iptables save
+  sudo: yes
+
+#
+# [EOF]
+#

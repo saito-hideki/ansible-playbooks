@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-02 18:06:00
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-06 22:31:33
+
+# [localhost]
+# 127.0.0.1 ansible_connection=local
+
+[dbms]
+172.16.0.103 ansible_connection=ssh
+172.16.0.104 ansible_connection=ssh
+172.16.0.105 ansible_connection=ssh
+
+#
+# [EOF]
+#
+

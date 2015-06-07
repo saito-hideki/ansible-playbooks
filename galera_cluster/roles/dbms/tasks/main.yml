@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-07 20:40:11
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-08 00:53:22
+---
+# file: roles/common/tasks/main.yml
+
+- name: Enabling the yum Repository
+  copy: src=MariaDB.repo dest=/etc/yum.repos.d/MariaDB.repo owner=root group=root mode=0644
+  sudo: yes
+
+- name: upgrade all packages
+  yum: name=* state=latest
+  sudo: yes
+
+- name: install galera packages
+  yum: name="{{ item }}" state=installed
+  with_items: "{{ galera_packages }}"
+  sudo: yes
+
+- name: copy my.cnf
+  template: src=my.cnf.j2 dest=/etc/my.cnf backup=yes owner=root group=root mode=0644
+  sudo: yes
+
+- name: start master node
+  command: service mysql bootstrap
+  when: ansible_hostname == "{{ galera_nodes.master_nodename }}"
+  sudo: yes
+
+- name: start slave node
+  command: service mysql start
+  when: ansible_hostname != "{{ galera_nodes.master_nodename }}"
+  sudo: yes
+
+
+#
+# [EOF]
+#
+

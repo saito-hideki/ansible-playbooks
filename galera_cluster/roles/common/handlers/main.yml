@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-06 22:22:30
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-07 20:41:29
+---
+# file: roles/common/handlers/main.yml
+
+- name: restart ntpd
+  service: name=ntpd state=restarted
+  sudo: yes
+
+#
+# [EOF]
+#
+

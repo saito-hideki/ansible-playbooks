@@ -1,0 +1,43 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-07 01:13:47
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-07 22:31:07
+
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+binlog_format=ROW
+bind-address=0.0.0.0
+character-set-server=utf8
+collation-server=utf8_general_ci
+default-storage-engine=innodb
+init-connect='SET NAMES utf8'
+innodb_file_per_table
+innodb_autoinc_lock_mode=2
+innodb_flush_log_at_trx_commit=0
+innodb_buffer_pool_size=122M
+wsrep_provider=/usr/lib64/galera/libgalera_smm.so
+wsrep_provider_options="gcache.size=300M; gcache.page_size=1G"
+wsrep_cluster_name="stackdb"
+wsrep_cluster_address="gcomm://{{ galera_nodes.node1 }},{{ galera_nodes.node2 }},{{ galera_nodes.node3 }}"
+wsrep_sst_method=rsync
+wsrep_node_address={{ inventory_hostname }}
+wsrep_node_name={{ ansible_hostname }}
+# wsrep_sst_auth=root:password
+
+[mysql_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client-server]
+#
+# include all files from the config directory
+#
+!includedir /etc/my.cnf.d
+
+#
+# [EOF]
+#
+

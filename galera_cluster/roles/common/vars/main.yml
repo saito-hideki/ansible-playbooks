@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-07 20:22:21
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-07 22:36:52
+---
+# file: roles/common/vars/main.yml
+
+ntpserver: ntp1.jst.mfeed.ad.jp
+
+packages:
+- ntp
+- ntpdate
+- iptables-services
+- net-tools
+- mlocate
+
+#
+# [EOF]
+#
+

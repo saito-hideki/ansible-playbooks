@@ -1,0 +1,14 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-07 22:33:19
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-07 22:34:39
+
+127.0.0.1       localhost
+172.16.0.103    ctrl00
+172.16.0.104    ctrl01
+172.16.0.105    ctrl02
+
+#
+# [EOF]
+#

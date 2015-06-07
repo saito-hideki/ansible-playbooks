@@ -1,0 +1,18 @@
+---
+# file: roles/dbms/vars/main.yml
+
+galera_packages:
+- MariaDB-client
+- MariaDB-Galera-server
+- galera
+
+galera_nodes:
+  master_nodename: ctrl00
+  node1: 172.16.0.103
+  node2: 172.16.0.104
+  node3: 172.16.0.105
+
+#
+# [EOF]
+#
+

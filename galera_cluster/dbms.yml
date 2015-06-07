@@ -1,0 +1,12 @@
+---
+# file: dbms.yml
+
+- hosts: dbms
+  roles:
+  - common
+  - dbms
+
+#
+# [EOF]
+#
+
