@@ -7,19 +7,19 @@
 
 ## 環境にあわせて変更が必要
 ### インベントリファイルの設定
-- production
+- file: production
 - dbmsグループに３台のDBサーバのIPアドレスを設定する
 - ここで設定したIPアドレスはgalera cluster用のmy.cnf内で設定するためホスト名ではなくIPアドレスを設定すること
 
 ### hostsファイルの設定
-- roles/common/files/hosts
+- file: roles/common/files/hosts
 - galera clusterのメンバーをhostsに記載する
 
 ### NTPサーバの設定
-- roles/common/vars/main.yml
+- file: roles/common/vars/main.yml
 - ntpserver パラメータに環境にあわせたNTPサーバのホスト名またはIPアドレスを設定する
 
 ### Galera ClusterのメンバーとなるDBサーバの設定
-- roles/dbms/vars/main.yml
+- file: roles/dbms/vars/main.yml
 - galera_nodesのパラメータmaster_nodenameに、galera clusterのマスターノードとなるノード名を設定する
 - galera_nodesのパラメータnode1,node2,node3にDBサーバのホスト名またはIPアドレスを設定する
