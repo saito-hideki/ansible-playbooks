@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
+# @Author: saitou
+# @Date:   2015-06-08 15:41:57
+# @Last Modified by:   saitou
+# @Last Modified time: 2015-06-08 15:42:18
 ---
 # file: site.yml
 
+- include: common.yml
 - include: dbms.yml
 
 #
