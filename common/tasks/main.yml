@@ -1,0 +1,40 @@
+---
+# tasks file for common
+
+- include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+      - '{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml'
+      - '{{ ansible_os_family}}-{{ ansible_distribution_major_version }}.yml'
+      - '{{ ansible_distribution }}-{{ ansible_distribution_version }}.yml'
+
+- block:
+  - name: Update Packages for RHEL family
+    yum:
+      name: '*'
+      state: latest
+  - name: Install EPEL Repository for RHEL family
+    yum:
+      name: '{{ epel_repository }}'
+      state: latest
+  - name: Install Packages for RHEL family
+    yum:
+      name: '{{ item }}'
+      state: latest
+    with_items: '{{ packages }}'
+  become: yes
+  when: ansible_os_family == 'RedHat'
+
+- block:
+  - name: Update Cache and Install Packages for Debian family
+    apt:
+      name: '{{ item }}'
+      update_cache: yes
+      state: latest
+    with_items: '{{ packages }}'
+  become: yes
+  when: ansible_os_family == 'Debian'
+
+#
+# [EOF]
+#

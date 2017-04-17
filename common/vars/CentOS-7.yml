@@ -1,0 +1,14 @@
+---
+epel_repository: 'epel-release'
+
+packages:
+  - 'git'
+  - 'mlocate'
+  - 'net-tools'
+  - 'ntp'
+  - 'wget'
+  - '@Development Tools'
+
+#
+# [EOF]
+#

@@ -1,0 +1,6 @@
+---
+packages:
+  - 'apt-file'
+  - 'mlocate'
+  - 'build-essential'
+  - 'git'
